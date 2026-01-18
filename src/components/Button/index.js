@@ -3,7 +3,7 @@ import { styles } from './styles';
 
 
 
-export default function Button({variant = 'primary', onPress}) {
+export default function Button({variant = 'primary', onPress, currency}) {
   return (
     <TouchableOpacity 
     onPress={onPress}
@@ -13,7 +13,7 @@ export default function Button({variant = 'primary', onPress}) {
         ]}>
       
       <Text style={styles.buttonText}>
-        Clique Aqui
+        {currency.name} ({currency.code})
 
       </Text>
     </TouchableOpacity>
