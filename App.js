@@ -13,7 +13,6 @@ import { currencies } from "./src/constants/currencies.js";
 import { Input } from "./src/components/input/index.js";
 import { ResultCard } from "./src/components/ResultCard/index.js";
 import {fetchExchangeRates} from "./src/services/api.js";
-import {useState} from "react";
 
 export default function App() {
   const [amount, setAmount] = useState('');
@@ -23,21 +22,21 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [exchangeRates, setExchangeRates] = useState(null);
 
-  
-
-  async function handleConvert() {
+  function handleConvert() {
+    if (!amount || isNaN(amount)) return;
     setLoading(true);
-    try {
-      const data = await fetchExchangeRates(fromCurrency);
-      console.log(data);
-      setResult(data[toCurrency]);
-    } catch (error) {
+    setResult('');
+    fetchExchangeRates(fromCurrency).then(data => {
+      const rate = data[toCurrency];
+      const convertedAmount = parseFloat(amount) * rate;
+      setResult(convertedAmount.toFixed(2));
+    }).catch(error => {
       console.error('Error fetching exchange rates:', error);
-    } finally {
+      setResult('Erro na conversão');
+    }).finally(() => {
       setLoading(false);
-    }
+    });
   }
-  const [inputValue, setInputValue] = useState('');
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -61,13 +60,15 @@ export default function App() {
             {currencies.map((currency) => (
               <Button
                 variant="primary"
-                onPress={() => {}}
+                
                 key={currency.code}
                 currency={currency}
+                onPress={() => setFromCurrency(currency.code)}
+                isSelected={fromCurrency === currency.code}
               />
             ))}
           </View>
-          <Input label="valor: " value={inputValue} onChangeText={setInputValue} />
+          <Input label="valor: " value={amount} onChangeText={setAmount} />
 
           <TouchableOpacity style={styles.swapButton}>
             <Text style={styles.swapButtonText}>↑↓</Text>
@@ -79,18 +80,20 @@ export default function App() {
             {currencies.map((currency) => (
               <Button
                 variant="secondary"
-                onPress={() => {}}
+                
                 key={currency.code}
                 currency={currency}
+                onPress={() => setToCurrency(currency.code)}
+                isSelected={toCurrency === currency.code}
               />
             ))}
           </View>
         </View>
-        <TouchableOpacity style={styles.converterButton}
-        onPress={handleConvert}>
-            <Text style={styles.swapButtonText}>Converter</Text>
+        <TouchableOpacity style={[styles.converterButton, loading && styles.converterButtonDisabled]}
+        onPress={handleConvert} disabled={loading}>
+            <Text style={styles.swapButtonText}>{loading ? 'Convertendo...' : 'Converter'}</Text>
           </TouchableOpacity>
-          <ResultCard />
+          <ResultCard result={result} />
       </ScrollView>
     </View>
   );
