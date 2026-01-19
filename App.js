@@ -23,13 +23,22 @@ export default function App() {
   const [exchangeRates, setExchangeRates] = useState(null);
 
   function handleConvert() {
-    if (!amount || isNaN(amount)) return;
+    console.log('handleConvert called with amount:', amount, 'from:', fromCurrency, 'to:', toCurrency);
+    if (!amount || isNaN(amount)) {
+      console.log('Invalid amount, returning');
+      return;
+    }
     setLoading(true);
     setResult('');
     fetchExchangeRates(fromCurrency).then(data => {
+      console.log('Data received:', data);
+      setExchangeRates(data);
+      const toSymbol = currencies.find(c => c.code === toCurrency).symbol;
       const rate = data[toCurrency];
+      console.log('Rate for', toCurrency, ':', rate);
       const convertedAmount = parseFloat(amount) * rate;
-      setResult(convertedAmount.toFixed(2));
+      console.log('Converted amount:', convertedAmount);
+      setResult(`${toSymbol} ${convertedAmount.toFixed(2)}`);
     }).catch(error => {
       console.error('Error fetching exchange rates:', error);
       setResult('Erro na conversão');
@@ -89,11 +98,11 @@ export default function App() {
             ))}
           </View>
         </View>
-        <TouchableOpacity style={[styles.converterButton, loading && styles.converterButtonDisabled]}
+         <TouchableOpacity style={[styles.converterButton, loading && styles.converterButtonDisabled]}
         onPress={handleConvert} disabled={loading}>
             <Text style={styles.swapButtonText}>{loading ? 'Convertendo...' : 'Converter'}</Text>
           </TouchableOpacity>
-          <ResultCard result={result} />
+          <ResultCard result={result} fromCurrency={fromCurrency} toCurrency={toCurrency} amount={amount} exchangeRates={exchangeRates} />
       </ScrollView>
     </View>
   );
