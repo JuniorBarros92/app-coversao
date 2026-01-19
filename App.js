@@ -44,7 +44,7 @@ export default function App() {
           <Input label="valor: " />
 
           <TouchableOpacity style={styles.swapButton} >
-            <Text>↑↓</Text>
+            <Text style={styles.swapButtonText}>↑↓</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
