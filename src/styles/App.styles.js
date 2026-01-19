@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   swapButton: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.inputBackground,
     paddingVertical: 16,
     paddingHorizontal: 24,
     borderRadius: 12,
@@ -63,6 +63,6 @@ export const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "600",
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 24,
   },
 });

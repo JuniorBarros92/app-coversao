@@ -46,6 +46,20 @@ export default function App() {
           <TouchableOpacity style={styles.swapButton} >
             <Text style={styles.swapButtonText}>↑↓</Text>
           </TouchableOpacity>
+          <Text style={styles.label}>Para:</Text>
+          <View style={styles.currencyGrid}>
+            <View />
+
+            {currencies.map((currency) => (
+              <Button
+                variant="secondary"
+                onPress={() => {}}
+                key={currency.code}
+                currency={currency}
+              />
+            ))}
+          </View>
+          <Input label="valor: " />
         </View>
       </ScrollView>
     </View>
