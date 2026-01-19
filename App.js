@@ -1,5 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import Button from "./src/components/Button/index.js";
 import { styles } from "./src/styles/App.styles";
 import { currencies } from "./src/constants/currencies.js";
@@ -24,8 +30,7 @@ export default function App() {
         <View style={styles.card}>
           <Text style={styles.label}>De:</Text>
           <View style={styles.currencyGrid}>
-          <View/>
-
+            <View />
 
             {currencies.map((currency) => (
               <Button
@@ -35,15 +40,12 @@ export default function App() {
                 currency={currency}
               />
             ))}
-</View>
-            <Input label="valor: "/>
+          </View>
+          <Input label="valor: " />
 
-            <TouchableOpacity>
-              <Text>
-                ↑↓
-              </Text>
-            </TouchableOpacity>
-          
+          <TouchableOpacity style={styles.swapButton} >
+            <Text>↑↓</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
