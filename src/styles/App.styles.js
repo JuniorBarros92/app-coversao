@@ -49,6 +49,10 @@ export const styles = StyleSheet.create({
       currencyGrid: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'space-between',
+        marginHorizontal: -4,
+        marginBottom: 12,
+        alignItems: 'center',
+        justifyContent: 'center',
       },
+
 });

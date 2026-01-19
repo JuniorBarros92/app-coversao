@@ -13,7 +13,7 @@ export default function Button({variant = 'primary', onPress, currency}) {
         ]}>
       
       <Text style={styles.buttonText}>
-        {currency.name} ({currency.code})
+         ({currency.code})
 
       </Text>
     </TouchableOpacity>
