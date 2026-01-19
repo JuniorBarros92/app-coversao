@@ -13,12 +13,29 @@ import { currencies } from "./src/constants/currencies.js";
 import { Input } from "./src/components/input/index.js";
 import { ResultCard } from "./src/components/ResultCard/index.js";
 import {fetchExchangeRates} from "./src/services/api.js";
+import {useState} from "react";
 
 export default function App() {
+  const [amount, setAmount] = useState('');
+  const [fromCurrency, setFromCurrency] = useState('USD');
+  const [toCurrency, setToCurrency] = useState('BRL');
+  const [result, setResult] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [exchangeRates, setExchangeRates] = useState(null);
+
+  
 
   async function handleConvert() {
-    const data = await fetchExchangeRates('BRL');
-    console.log(data);
+    setLoading(true);
+    try {
+      const data = await fetchExchangeRates(fromCurrency);
+      console.log(data);
+      setResult(data[toCurrency]);
+    } catch (error) {
+      console.error('Error fetching exchange rates:', error);
+    } finally {
+      setLoading(false);
+    }
   }
   const [inputValue, setInputValue] = useState('');
   return (
