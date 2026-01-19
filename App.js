@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Button from "./src/components/Button/index.js";
 import { styles } from "./src/styles/App.styles";
 import { currencies } from "./src/constants/currencies.js";
+import { Input } from "./src/components/input/index.js";
 
 export default function App() {
   return (
@@ -34,6 +35,8 @@ export default function App() {
                 currency={currency}
               />
             ))}
+
+            <Input />
           </View>
         </View>
       </ScrollView>
