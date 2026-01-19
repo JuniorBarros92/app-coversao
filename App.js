@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,8 +11,16 @@ import Button from "./src/components/Button/index.js";
 import { styles } from "./src/styles/App.styles";
 import { currencies } from "./src/constants/currencies.js";
 import { Input } from "./src/components/input/index.js";
+import { ResultCard } from "./src/components/ResultCard/index.js";
+import {fetchExchangeRates} from "./src/services/api.js";
 
 export default function App() {
+
+  async function handleConvert() {
+    const data = await fetchExchangeRates('BRL');
+    console.log(data);
+  }
+  const [inputValue, setInputValue] = useState('');
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -41,9 +50,9 @@ export default function App() {
               />
             ))}
           </View>
-          <Input label="valor: " />
+          <Input label="valor: " value={inputValue} onChangeText={setInputValue} />
 
-          <TouchableOpacity style={styles.swapButton} >
+          <TouchableOpacity style={styles.swapButton}>
             <Text style={styles.swapButtonText}>↑↓</Text>
           </TouchableOpacity>
           <Text style={styles.label}>Para:</Text>
@@ -59,8 +68,12 @@ export default function App() {
               />
             ))}
           </View>
-          <Input label="valor: " />
         </View>
+        <TouchableOpacity style={styles.converterButton}
+        onPress={handleConvert}>
+            <Text style={styles.swapButtonText}>Converter</Text>
+          </TouchableOpacity>
+          <ResultCard />
       </ScrollView>
     </View>
   );

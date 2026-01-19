@@ -65,4 +65,14 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 24,
   },
+  converterButton: {
+    backgroundColor: colors.primary,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+    marginBottom: 24,
+  },
+  converterButtonDisabled: {
+    backgroundColor: colors.disabled,
+  },
 });
