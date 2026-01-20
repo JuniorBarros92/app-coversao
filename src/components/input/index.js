@@ -2,8 +2,6 @@ import { View, Text } from 'react-native';
 import { TextInput } from 'react-native';
 import { styles } from './styles';
 
-
-
 export function Input({ value, onChangeText, label }) {
     return (
         <View style={styles.container}>

@@ -7,14 +7,167 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import Button from "./src/components/Button/index.js";
-import { styles } from "./src/styles/App.styles";
-import { currencies } from "./src/constants/currencies.js";
-import { Input } from "./src/components/input/index.js";
-import { ResultCard } from "./src/components/ResultCard/index.js";
-import {fetchExchangeRates} from "./src/services/api.js";
+import Button from "./src/components/Button/index";
+import { currencies } from "./src/constants/currencies";
+import { Input } from "./src/components/input/index";
+import { ResultCard } from "./src/components/ResultCard/index";
+import {fetchExchangeRates} from "./src/services/api";
+
+const colors = {
+  primary: '#2563eb',
+  secondary: '#16a34a',
+  background: '#0f172a',
+  cardBackground: '#1e293b',
+  inputBackground: '#334155',
+  text: '#ffffff',
+  textSecondary: '#94a3b8',
+  disabled: '#334155',
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  ScrollView: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 80,
+    paddingBottom: 24,
+  },
+  header: {
+    marginBottom: 32,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: colors.text,
+    marginBottom: 8,
+  },
+  subTitle: {
+    fontSize: 16,
+    color: colors.textSecondary,
+  },
+  card: {
+    backgroundColor: colors.cardBackground,
+    borderRadius: 16,
+    padding: 24,
+    marginBottom: 24,
+  },
+  label: {
+    color: colors.textSecondary,
+    marginBottom: 8,
+    fontSize: 14,
+  },
+  currencyGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginHorizontal: -4,
+    marginBottom: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  swapButton: {
+    backgroundColor: colors.inputBackground,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+    marginBottom: 24,
+  },
+  swapButtonText: {
+    color: "#fff",
+    fontWeight: "600",
+    textAlign: "center",
+    fontSize: 24,
+  },
+  converterButton: {
+    backgroundColor: colors.primary,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+    marginBottom: 24,
+  },
+  converterButtonDisabled: {
+    backgroundColor: colors.disabled,
+  },
+});
 
 export default function App() {
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+    ScrollView: {
+      flex: 1,
+    },
+    content: {
+      flex: 1,
+      paddingHorizontal: 24,
+      paddingTop: 80,
+      paddingBottom: 24,
+    },
+    header: {
+      marginBottom: 32,
+    },
+    title: {
+      fontSize: 24,
+      fontWeight: "bold",
+      color: colors.text,
+      marginBottom: 8,
+    },
+    subTitle: {
+      fontSize: 16,
+      color: colors.textSecondary,
+    },
+    card: {
+      backgroundColor: colors.cardBackground,
+      borderRadius: 16,
+      padding: 24,
+      marginBottom: 24,
+    },
+    label: {
+      color: colors.textSecondary,
+      marginBottom: 8,
+      fontSize: 14,
+    },
+    currencyGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      marginHorizontal: -4,
+      marginBottom: 12,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    swapButton: {
+      backgroundColor: colors.inputBackground,
+      paddingVertical: 16,
+      paddingHorizontal: 24,
+      borderRadius: 12,
+      marginBottom: 24,
+    },
+    swapButtonText: {
+      color: "#fff",
+      fontWeight: "600",
+      textAlign: "center",
+      fontSize: 24,
+    },
+    converterButton: {
+      backgroundColor: colors.primary,
+      paddingVertical: 16,
+      paddingHorizontal: 24,
+      borderRadius: 12,
+      marginBottom: 24,
+    },
+    converterButtonDisabled: {
+      backgroundColor: colors.disabled,
+    },
+  });
+
   const [amount, setAmount] = useState('');
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('BRL');

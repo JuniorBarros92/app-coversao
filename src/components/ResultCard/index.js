@@ -10,7 +10,7 @@ export function ResultCard({ fromCurrency, toCurrency, amount, result, exchangeR
             <Text style={{ color: '#ffffff', fontSize: 18 }}>Resultado: {result}</Text>
             {exchangeRates && (
                 <Text style={{ color: '#94a3b8', fontSize: 14, marginTop: 8 }}>
-                    Taxa: 1 {fromCurrency} = {exchangeRates[toCurrency]?.toFixed(4)} {toCurrency}
+                    Taxa: 1 {fromCurrency} = {exchangeRates[toCurrency].toFixed(4)} {toCurrency}
                 </Text>
             )}
         </View>
